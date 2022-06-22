@@ -1,5 +1,6 @@
 import { useCallback, useEffect } from "react";
 
+import DappModal from "components/DappModal";
 import Grid from "components/Grid";
 import Header from "components/Header";
 import HelpModal from "components/HelpModal";
@@ -81,6 +82,10 @@ export default function Home() {
       />
       <SettingsModal
         open={gameState.activeModal === "settings"}
+        onClose={gameActions.closeModal}
+      />
+      <DappModal
+        open={gameState.activeModal === "dapp"}
         onClose={gameActions.closeModal}
       />
     </div>

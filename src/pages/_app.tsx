@@ -8,6 +8,8 @@ import "react-toastify/dist/ReactToastify.min.css";
 
 import "../styles/globals.css";
 
+import { Web3Provider } from "@ethersproject/providers";
+import { Web3ReactProvider } from "@web3-react/core";
 import MetaData from "components/MetaData";
 import { AnimatePresence } from "framer-motion";
 import tw from "lib/tw";
@@ -19,6 +21,12 @@ const contextClass: Record<TypeOptions, string> = {
   warning: tw`ring-2 ring-orange-600 text-orange-600 bg-orange-50`,
   default: tw`ring-2 ring-indigo-600 text-indigo-600 bg-indigo-50`,
 };
+
+function getLibrary(provider: any): Web3Provider {
+  const library = new Web3Provider(provider);
+  library.pollingInterval = 12000;
+  return library;
+}
 
 function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
@@ -35,12 +43,12 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, []);
 
   return (
-    <>
+    <Web3ReactProvider getLibrary={getLibrary}>
       <MetaData />
       <AnimatePresence>
         <Component {...pageProps} />
       </AnimatePresence>
-    </>
+    </Web3ReactProvider>
   );
 }
 

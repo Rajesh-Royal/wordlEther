@@ -16,6 +16,7 @@ export default function Header(props: Props) {
             <HelpIcon />
           </IconButton>
         </div>
+       
         <div className="pointer-events-none text-center text-4xl font-bold uppercase tracking-widest text-white">
           {APP_NAME}
         </div>

@@ -1,12 +1,15 @@
 import { useMemo } from "react";
+import { useGameStore } from "stores/game";
 import { useStatsStore } from "stores/stats";
+import { KeyButton } from "./Keyboard";
 import Modal, { Props as ModalProps } from "./Modal";
 
 export type Props = Pick<ModalProps, "open" | "onClose">;
 
 export default function StatsModal(props: Props) {
   const { state } = useStatsStore();
-
+  const { actions: gameActions } = useGameStore();
+  
   const totalPlayed = state.wins + state.losses;
 
   const stats = useMemo(
@@ -64,6 +67,12 @@ export default function StatsModal(props: Props) {
               </div>
             </div>
           ))}
+        </div>
+        <div className="text-center mt-4">
+          <KeyButton onClick={() => {
+            console.log("hello")
+            gameActions.openModal("dapp")
+           }} >Create Blockchain Entry</KeyButton>
         </div>
       </div>
     </Modal>

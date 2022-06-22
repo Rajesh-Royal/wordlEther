@@ -1,1 +1,1 @@
-export const SESSION_COOKIE_NAME = "weirdle";
+export const SESSION_COOKIE_NAME = "wordlEther";

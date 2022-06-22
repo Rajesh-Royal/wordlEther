@@ -1,0 +1,8 @@
+export enum SUPPORTED_CHAINS {
+    ETHEREUM = 1,
+    ROPESTEN_TESTNET = 3,
+    LOCALHOST = 1337,
+    KOVAN = 42,
+    RINKEBY = 4,
+    GOERLI = 5,
+}
