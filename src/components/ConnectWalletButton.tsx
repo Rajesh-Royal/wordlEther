@@ -12,7 +12,7 @@ export const ConnectWalletButton = () => {
     activate(injectedConnector)
   }
   return (
-       account ? <KeyButton>Connected ✅</KeyButton> : <KeyButton type="button" onClick={connectWallet}>
+       account ? <KeyButton type="button">Connected ✅</KeyButton> : <KeyButton type="button" onClick={connectWallet}>
           Connect Metamask
         </KeyButton>
   )
