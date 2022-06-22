@@ -112,4 +112,5 @@ export const KeyButton = tw.button`
    p-2 rounded-md md:text-xl sm:text-sm text-xs font-bold transition-all 
    md:min-w-[2.5rem]
    min-w-[1.85rem]
+   cursor-pointer
 `;
