@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+@import url('https://fonts.googleapis.com/css2?family=Raleway+Dots&family=Roboto:wght@400;700&display=swap');
+.raleway-dots{
+    font-family: 'Raleway Dots', cursive;
+}
+
+body, html{
+    font-family: 'Roboto', sans-serif;
+}
