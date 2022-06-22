@@ -64,7 +64,7 @@ export default function Keyboard({ onKeyPress, disabled, usedKeys }: Props) {
           tiles.find(propEq("variant", "absent"));
 
         return {
-          color: tile?.variant ? "white" : "black",
+          color: tile?.variant ? "whitesmoke" : "#3e3e3e",
           background: match(tile?.variant ?? "empty")
             .with("absent", always("rgb(75 85 99)"))
             .with("correct", always("rgb(34 197 94)"))
@@ -96,6 +96,7 @@ export default function Keyboard({ onKeyPress, disabled, usedKeys }: Props) {
                 style={
                   disabled ? { opacity: 0.5 } : getKeyColors(key.toLowerCase())
                 }
+                 
               >
                 {isMappableKey(key) ? MAPPABLE_KEYS[key] : key}
               </KeyButton>
@@ -109,8 +110,10 @@ export default function Keyboard({ onKeyPress, disabled, usedKeys }: Props) {
 
 export const KeyButton = tw.button`
   bg-gray-300 hover:bg-gray-400 active:opacity-60 md:p-3 
-   p-2 rounded-md md:text-xl sm:text-sm text-xs font-bold transition-all 
+   p-2 rounded-md md:text-xl sm:text-sm text-xs transition-all 
    md:min-w-[2.5rem]
    min-w-[1.85rem]
    cursor-pointer
+   text-gray-700
+   font-medium
 `;

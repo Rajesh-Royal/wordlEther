@@ -1,6 +1,6 @@
-import { FC } from "react";
 import clsx from "clsx";
 import { motion } from "framer-motion";
+import { FC } from "react";
 
 import type { GameTile } from "stores/game";
 
@@ -8,20 +8,21 @@ export type TileProps = GameTile & { delay?: number; size?: number };
 
 const Tile: FC<TileProps> = (props) => (
   <div
-    className={clsx(
-      "preserve-3d",
-      "origin-center scale-90 sm:scale-100 lg:scale-110"
+  className={clsx(
+    "preserve-3d",
+    "origin-center scale-90 sm:scale-100 lg:scale-110"
     )}
     style={{ perspective: 500, height: props.size, width: props.size }}
-  >
+    >
     <motion.div
+       data-animation={props.children === "" ? "idle" : "pop"}
       initial={props.variant !== "empty" ? { transform: "rotateX(0)" } : false}
       animate={
         props.variant !== "empty" ? { transform: "rotateX(180deg)" } : false
       }
       transition={{ type: "spring", delay: props.delay, duration: 2 }}
       className={clsx(
-        "grid select-none place-items-center border-2 text-xl uppercase md:text-2xl",
+        "grid select-none place-items-center border-2 text-xl uppercase md:text-2xl tile",
         "dark:text-white",
         {
           "border-green-500 bg-green-500 text-white":
