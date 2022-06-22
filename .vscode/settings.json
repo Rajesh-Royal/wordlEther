@@ -10,5 +10,16 @@
         "tw`([^`]*)", // tw`...`
         "tw\\.[^`]+`([^`]*)`", // tw.xxx<xxx>`...`
         "tw\\(.*?\\).*?`([^`]*)" // tw(Component)<xxx>`...`
-    ]
+    ],
+    "editor.defaultFormatter": "vscode.typescript-language-features",
+    "[javascript, typescript, html, json, javascriptreact, typescriptreact, typescriptreact, css, scss]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": true,
+        "source.addMissingImports": true,
+    },
 }
