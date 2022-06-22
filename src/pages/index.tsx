@@ -1,12 +1,12 @@
 import { useCallback, useEffect } from "react";
 
-import { useGameStore } from "stores/game";
-import Header from "components/Header";
 import Grid from "components/Grid";
-import Keyboard, { isMappableKey } from "components/Keyboard";
+import Header from "components/Header";
 import HelpModal from "components/HelpModal";
-import StatsModal from "components/StatsModal";
+import Keyboard, { isMappableKey } from "components/Keyboard";
 import SettingsModal from "components/SettingsModal";
+import StatsModal from "components/StatsModal";
+import { useGameStore } from "stores/game";
 import { useStatsStore } from "stores/stats";
 
 const { useSelector } = useGameStore;
@@ -42,6 +42,7 @@ export default function Home() {
               statsActions.captureWin({
                 attempts: result.attempts,
               });
+              gameActions.openModal("stats")
               break;
             case "loss":
               statsActions.captureLoss();

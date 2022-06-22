@@ -16,15 +16,15 @@ export async function handler(
   res: NextApiResponse<SecretApiResponse>
 ) {
   const { length, items } = data;
-  console.log('req.session.get("secret");', req.session.get("secret"))
 
   const secret = items[randomInt(length)];
+  console.log('secret', secret)
 
-    req.session.set("secret", secret);
+    req.session.set("secret: ", secret);
     req.session.save().then((data) => {
-        console.log("session data : ", data)
+        // console.log("session data : ", data)
     }).catch((error) => {
-        console.log("Error: ", error)
+        // console.log("Error: ", error)
     }) 
 
   res.status(200).json({ secret });
