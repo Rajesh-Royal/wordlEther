@@ -1,6 +1,5 @@
-import { Html, Head, Main, NextScript } from "next/document";
+import { Head, Html, Main, NextScript } from "next/document";
 
-import { APP_NAME } from "stores/game/constants";
 
 export default function Document() {
   return (
@@ -8,8 +7,6 @@ export default function Document() {
       <Head>
         <meta charSet="utf-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-
-        <meta name="description" content={`${APP_NAME} - a word puzzle game`} />
         <meta name="keywords" content="wordle, puzzle, game" />
         <link rel="manifest" href="/manifest.json" />
         <link
@@ -20,16 +17,15 @@ export default function Document() {
         />
         <link rel="apple-touch-icon" href="/icons/icon-192.png"></link>
         <meta name="theme-color" content="#6aaa64" />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap"
-        />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
       </Head>
       <body>
         <Main />
         <NextScript />
         <a
-          href="https://github.com/alanrsoares/weirdle"
+          href="https://github.com/Rajesh-Royal/wordlEther"
           className="github-corner"
           aria-label="View source on GitHub"
           target="_blank"
@@ -40,7 +36,7 @@ export default function Document() {
             height="80"
             viewBox="0 0 250 250"
             aria-hidden="true"
-            className="invisible absolute top-0 right-0 fill-white text-[#151513] md:visible"
+            className="invisible absolute bottom-0 left-0 fill-white text-[#151513] md:visible rotate-180"
           >
             <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
             <path

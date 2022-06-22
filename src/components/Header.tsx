@@ -10,7 +10,7 @@ type Props = {
 export default function Header(props: Props) {
   return (
     <header className="w-full border-b-2 bg-brand p-4 dark:border-gray-800">
-      <div className="m-auto flex max-w-lg justify-between">
+      <div className="m-auto flex max-w-full justify-between">
         <div className="flex gap-2">
           <IconButton onClick={props.onIconClick.bind(null, "help")}>
             <HelpIcon />
