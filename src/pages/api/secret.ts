@@ -1,8 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Session } from "next-iron-session";
 
-import data from "db/db.json";
 import { randomInt } from "crypto";
+import data from "db/db.json";
 import { withSession } from "lib/session";
 
 export type SecretApiResponse = {
@@ -16,11 +16,16 @@ export async function handler(
   res: NextApiResponse<SecretApiResponse>
 ) {
   const { length, items } = data;
+  console.log('req.session.get("secret");', req.session.get("secret"))
 
   const secret = items[randomInt(length)];
 
-  req.session.set("secret", secret);
-  await req.session.save();
+    req.session.set("secret", secret);
+    req.session.save().then((data) => {
+        console.log("session data : ", data)
+    }).catch((error) => {
+        console.log("Error: ", error)
+    }) 
 
   res.status(200).json({ secret });
 }
