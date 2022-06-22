@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.10.9](https://github.com/Rajesh-Royal/wordle-on-blockchain/compare/v0.10.8...v0.10.9) (2022-06-22)
+
+
+### Features
+
+* tailwind intellisense  added for the vs code ([a364e5b](https://github.com/Rajesh-Royal/wordle-on-blockchain/commit/a364e5bf78157d1ee4fd1361004e6b67e71138c1))
+
+
+### Bug Fixes
+
+* req.session.save() unhandled error fixed ([5fcf751](https://github.com/Rajesh-Royal/wordle-on-blockchain/commit/5fcf751318af634b77014ad7a4244de7b52ac44f))
+
 ### [0.10.8](https://github.com/Rajesh-Royal/wordle-on-blockchain/compare/v0.10.6...v0.10.8) (2022-06-22)
 
 
