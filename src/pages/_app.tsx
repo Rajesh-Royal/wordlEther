@@ -1,18 +1,16 @@
+import { XIcon } from "@heroicons/react/solid";
+import clsx from "clsx";
+import type { AppProps } from "next/app";
 import { useEffect } from "react";
 import { toast, TypeOptions } from "react-toastify";
-import Head from "next/head";
-import type { AppProps } from "next/app";
-import clsx from "clsx";
-import { XIcon } from "@heroicons/react/solid";
 
 import "react-toastify/dist/ReactToastify.min.css";
 
 import "../styles/globals.css";
 
-import tw from "lib/tw";
-import { capitalize } from "lib/utils";
-import { APP_NAME } from "stores/game/constants";
+import MetaData from "components/MetaData";
 import { AnimatePresence } from "framer-motion";
+import tw from "lib/tw";
 
 const contextClass: Record<TypeOptions, string> = {
   success: tw`ring-2 ring-blue-600 text-blue-600 bg-blue-50`,
@@ -38,9 +36,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <Head>
-        <title>{capitalize(APP_NAME)}</title>
-      </Head>
+      <MetaData />
       <AnimatePresence>
         <Component {...pageProps} />
       </AnimatePresence>
