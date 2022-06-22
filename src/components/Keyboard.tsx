@@ -1,6 +1,7 @@
+import { always, propEq } from "ramda";
 import { useCallback, useEffect } from "react";
 import { match } from "ts-pattern";
-import { always, propEq } from "ramda";
+// @ts-ignore
 import tw from "tailwind-styled-components";
 
 import type { GameTile } from "stores/game";
