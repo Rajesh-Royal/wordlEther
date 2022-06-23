@@ -61,5 +61,5 @@
       "pre-commit": "pretty-quick --staged"
     }
   },
-  "version": "0.10.10"
+  "version": "0.10.11"
 }
