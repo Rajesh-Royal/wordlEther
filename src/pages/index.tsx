@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from "react";
 
-import DappModal from "components/DappModal";
+import DappModal from "components/dapp/DappModal";
 import Grid from "components/Grid";
 import Header from "components/Header";
 import HelpModal from "components/HelpModal";
