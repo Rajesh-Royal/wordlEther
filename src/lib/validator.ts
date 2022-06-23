@@ -14,7 +14,7 @@ export interface UserGameStatsInterFace {
     description: string
 }
 
-let contractAddress = "0x76Ba1c8F94B05a6F02A3aC495cd602F7FadD72Fa";
+let contractAddress = process.env.NEXT_PUBLIC_SMART_CONTRACT_ADDRESS;
 
 const PRICE_PER_TRANSACTION = 0;
 const pricePerTransaction = new BigNumber(PRICE_PER_TRANSACTION);

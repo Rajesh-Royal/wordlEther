@@ -109,7 +109,7 @@ const TransactionForm = ({setSteps, setTxResults}: {setSteps: Dispatch<SetStateA
         <textarea name="description" rows={4} placeholder="Write Game Description" className={inputStyle} onChange={(e) => updateInputValues({ target: e.target.name, value: e.target.value })} value={values.description} disabled={loading} />
       </div>
       <div className="text-center">
-        <KeyButton onClick={() => handleSubmit()} disabled={loading}>{loading ? <Processing /> : "Create Transaction"}</KeyButton>
+        <KeyButton onClick={() => handleSubmit()} disabled={loading || state.maxStreak === 0}>{loading ? <Processing /> : "Create Transaction"}</KeyButton>
       </div>
       </div>
   )
