@@ -54,3 +54,11 @@ body, html{
       transform: rotateX(0);
     }
   }
+
+
+
+  .transaction-result div p{
+    padding-bottom: 10px;
+    padding-top: 10px;
+    border-bottom: 1px solid gray;
+  }

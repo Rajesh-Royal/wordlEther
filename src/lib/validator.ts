@@ -1,21 +1,25 @@
+import { AbstractConnector } from '@web3-react/abstract-connector';
 import BigNumber from 'bignumber.js';
 import Web3 from 'web3';
-import { SendOptions } from 'web3-eth-contract';
-import { contractAbi } from "./contractAbi";
-
-
-import { AbstractConnector } from '@web3-react/abstract-connector';
+import { contractAbi } from "../db/contract-abi";
 // import { depositJSON } from './deposit';
-import { prefix0X } from './prefix0x';
-import { DepositKeyInterface } from './validateDepositKey';
+export interface UserGameStatsInterFace {
+    id: string,
+    gamePlayed: number,
+    winPercentage: number,
+    currentStreak: number,
+    maxStreak: number,
+    Tries: number[],
+    playerName: string,
+    description: string
+}
 
-let contractAddress = "0x4242424242424242424242424242424242424242";
+let contractAddress = "0x76Ba1c8F94B05a6F02A3aC495cd602F7FadD72Fa";
 
-const PRICE_PER_VALIDATOR = 32;
-const pricePerValidator = new BigNumber(PRICE_PER_VALIDATOR);
-const TX_VALUE = pricePerValidator.multipliedBy(1e18).toNumber();
+const PRICE_PER_TRANSACTION = 0;
+const pricePerTransaction = new BigNumber(PRICE_PER_TRANSACTION);
 
-export async function initiateTransaction(account: string, chainId: number | undefined, connector: AbstractConnector | undefined, depositFile: DepositKeyInterface[]) {
+export async function initiateTransaction(account: string, chainId: number | undefined, connector: AbstractConnector | undefined, userGameStats: UserGameStatsInterFace) {
 
     const walletProvider: any = await (connector as AbstractConnector).getProvider();
     const web3 = new Web3(walletProvider);
@@ -24,23 +28,26 @@ export async function initiateTransaction(account: string, chainId: number | und
     const transactionParameters: SendOptions = {
         gasPrice: web3.utils.toHex(await web3.eth.getGasPrice()),
         from: account,
-        value: TX_VALUE,
+        value: pricePerTransaction.toNumber(),
+        data: userGameStats
     };
 
     return new Promise((resolve, reject) => {
-        if (!Array.isArray(depositFile) || depositFile?.length === 0) {
-            reject("Upload a deposit file first")
+        if (!userGameStats) {
+            reject("User game stats are not valid!")
         }
-        let depositJSON = depositFile[0];
 
         contract.methods
-            .deposit(
-                prefix0X(depositJSON.pubkey),
-                prefix0X(depositJSON.withdrawal_credentials),
-                prefix0X(depositJSON.signature),
-                prefix0X(depositJSON.deposit_data_root)
-            )
-            .send(transactionParameters)
+            .registerGames(
+                userGameStats.id,
+                userGameStats.gamePlayed,
+                userGameStats.winPercentage,
+                userGameStats.currentStreak,
+                userGameStats.maxStreak,
+                userGameStats.Tries,
+                userGameStats.playerName,
+                userGameStats.description
+            ).send(transactionParameters)
             .on('transactionHash', (txHash: string): void => {
                 console.log("Transaction Hash => ", txHash)
             })
@@ -58,4 +65,13 @@ export async function initiateTransaction(account: string, chainId: number | und
                 reject(error)
             });
     })
+}
+
+export interface SendOptions {
+    from: string;
+    gasPrice?: string;
+    gas?: number;
+    value?: number | string;
+    nonce?: number;
+    data: UserGameStatsInterFace
 }

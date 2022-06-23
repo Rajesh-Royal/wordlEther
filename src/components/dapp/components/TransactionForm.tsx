@@ -1,10 +1,28 @@
 import { Web3Provider } from "@ethersproject/providers";
 import { useWeb3React } from "@web3-react/core";
 import { KeyButton } from "components/Keyboard";
-import { useMemo, useState } from "react";
+import { useFormik } from "formik";
+import { initiateTransaction, UserGameStatsInterFace } from "lib/validator";
+import { nanoid } from 'nanoid';
+import { Dispatch, SetStateAction, useMemo, useState } from "react";
+import { GamePlayerStatsValidationSchema } from "schema/GamePlayerStatsValidationSchema";
 import { useStatsStore } from "stores/stats";
+import { TxResultsInterface } from "../DappModal";
+const uniqueId = nanoid();
 
-const TransactionForm = () => {
+export const Processing = () => {
+  return (
+    <p className="flex align-middle">
+    <svg className="animate-spin -ml-1 mt-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+      </svg>
+      Processing...
+  </p>
+  )
+}
+
+const TransactionForm = ({setSteps, setTxResults}: {setSteps: Dispatch<SetStateAction<"connect" | "userDetails" | "success" | "failed">>, setTxResults: Dispatch<SetStateAction<TxResultsInterface | undefined>>}) => {
   const { account, chainId, connector } = useWeb3React<Web3Provider>();
 
    const { state } = useStatsStore();
@@ -33,27 +51,41 @@ const TransactionForm = () => {
     [state.currentStreak, state.maxStreak, state.wins, totalPlayed]
   );
 
-  const [txResult, setTxResult] = useState<any>();
-  const [txSuccess, setTxSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  
-
-  const executeTransaction = () => {
-    setTxResult(null);
-    setLoading(true);
-    if (true) {
-      //   initiateTransaction(account as string, chainId, connector, {}).then((response) => {
-      //     setTxResult(JSON.stringify(response,  undefined, 2));
-      //     setLoading(false)
-      //     setTxSuccess(true);
-      //   }).catch((error) => {
-      //   console.log('error', error)
-      //     setTxSuccess(false)
-      //     setLoading(false);
-      //     setTxResult(JSON.stringify(error,  undefined, 2));
-      // })
+  const transactionFormFormik = useFormik<UserGameStatsInterFace>({
+    initialValues: {
+      id: uniqueId,
+      gamePlayed: totalPlayed,
+      winPercentage: parseInt((!state.wins ? 0 : (state.wins / totalPlayed) * 100).toFixed(0)),
+      currentStreak: state.currentStreak,
+      maxStreak: state.maxStreak,
+      Tries: state.distribution.map((value) => value),
+      playerName: "",
+      description: ""
+    },
+    validationSchema: GamePlayerStatsValidationSchema,
+    onSubmit: (values) => {
+      console.log('values', values);
+      setTxResults(undefined);
+      setLoading(true);
+      initiateTransaction(account as string, chainId, connector, values).then((response) => {
+        setTxResults(response as TxResultsInterface);
+        setLoading(false)
+        setSteps("success")
+      }).catch((error: any) => {
+        console.log('error', error)
+        setSteps("failed")
+        setLoading(false);
+        // setTxResults(error);
+      })
     }
+  });
+  const { errors, setFieldValue, values, handleSubmit } = transactionFormFormik;
+  console.log('errors', errors)
+
+  const updateInputValues = (e: {target: string, value: string}) => {
+    setFieldValue(e.target, e.value)
   }
 
   const inputStyle = `p-2 text-gray-600 dark:text-white bg-slate-200 dark:bg-slate-700 border-none outline-none`
@@ -73,11 +105,11 @@ const TransactionForm = () => {
           ))}
       </div>
       <div className="flex flex-col w-full gap-2">
-        <input type="text" name="playerName" placeholder="Enter Player Name" className={inputStyle} />
-        <textarea name="description" rows={4} placeholder="Write Game Description" className={inputStyle} />
+        <input type="text" name="playerName" placeholder="Enter Player Name" className={inputStyle} onChange={(e) => updateInputValues({ target: e.target.name, value: e.target.value })} value={values.playerName} disabled={loading} />
+        <textarea name="description" rows={4} placeholder="Write Game Description" className={inputStyle} onChange={(e) => updateInputValues({ target: e.target.name, value: e.target.value })} value={values.description} disabled={loading} />
       </div>
       <div className="text-center">
-        <KeyButton>Create Transaction</KeyButton>
+        <KeyButton onClick={() => handleSubmit()} disabled={loading}>{loading ? <Processing /> : "Create Transaction"}</KeyButton>
       </div>
       </div>
   )

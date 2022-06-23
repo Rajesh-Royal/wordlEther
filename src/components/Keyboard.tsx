@@ -42,8 +42,8 @@ type Props = {
 export default function Keyboard({ onKeyPress, disabled, usedKeys }: Props) {
   useEffect(() => {
     function onKeyUp(e: KeyboardEvent) {
-      if (isValidKey(e.key.toLowerCase())) {
-        onKeyPress(e.key.toLowerCase());
+      if (isValidKey(e.key?.toLowerCase())) {
+        onKeyPress(e.key?.toLowerCase());
       }
     }
 
@@ -116,4 +116,5 @@ export const KeyButton = tw.button`
    cursor-pointer
    text-gray-700
    font-medium
+   disabled:cursor-not-allowed
 `;
