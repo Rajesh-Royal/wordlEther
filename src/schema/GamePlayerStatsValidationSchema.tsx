@@ -1,4 +1,4 @@
-import * as Yup from "Yup";
+import * as Yup from "yup";
 export const GamePlayerStatsValidationSchema = Yup.object({
     id: Yup.string().required("Unique Id is required"),
     gamePlayed: Yup.number().required("Game played score is required"),
