@@ -11,8 +11,7 @@ import TransactionForm from "./components/TransactionForm";
 export type Props = Pick<ModalProps, "open" | "onClose">;
 
 export default function DappModal(props: Props) {
-  const { account, chainId } = useWeb3React<Web3Provider>();
-  console.log('account', account)
+  const { account } = useWeb3React<Web3Provider>();
   const [steps, setSteps] = useState<"connect" | "userDetails" | "success" | "failed">("connect");
   const [txResults, setTxResults] = useState<TxResultsInterface | undefined>();
   const { actions: gameActions } = useGameStore();

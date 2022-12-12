@@ -16,6 +16,54 @@ export const contractAbi: EFAbi[] = [
         "type": "event"
     },
     {
+        "inputs": [
+            {
+                "internalType": "string",
+                "name": "id",
+                "type": "string"
+            },
+            {
+                "internalType": "uint256",
+                "name": "gamePlayed",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "winPercentage",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "currentStreak",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "maxStreak",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256[]",
+                "name": "Tries",
+                "type": "uint256[]"
+            },
+            {
+                "internalType": "string",
+                "name": "playerName",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "description",
+                "type": "string"
+            }
+        ],
+        "name": "registerGames",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
         "inputs": [],
         "name": "getAllGameStates",
         "outputs": [
@@ -122,54 +170,6 @@ export const contractAbi: EFAbi[] = [
             }
         ],
         "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "string",
-                "name": "id",
-                "type": "string"
-            },
-            {
-                "internalType": "uint256",
-                "name": "gamePlayed",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "winPercentage",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "currentStreak",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "maxStreak",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256[]",
-                "name": "Tries",
-                "type": "uint256[]"
-            },
-            {
-                "internalType": "string",
-                "name": "playerName",
-                "type": "string"
-            },
-            {
-                "internalType": "string",
-                "name": "description",
-                "type": "string"
-            }
-        ],
-        "name": "registerGames",
-        "outputs": [],
-        "stateMutability": "nonpayable",
         "type": "function"
     },
     {
