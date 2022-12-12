@@ -66,7 +66,7 @@ const TransactionForm = ({setSteps, setTxResults}: {setSteps: Dispatch<SetStateA
     },
     validationSchema: GamePlayerStatsValidationSchema,
     onSubmit: (values) => {
-      console.log('values', values);
+      // console.log('values', values);
       setTxResults(undefined);
       setLoading(true);
       initiateTransaction(account as string, chainId, connector, values).then((response) => {

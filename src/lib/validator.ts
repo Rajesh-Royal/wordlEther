@@ -32,6 +32,9 @@ export async function initiateTransaction(account: string, chainId: number | und
         data: userGameStats
     };
 
+    let values = await contract.methods.getAllGameStates().call();
+    console.log('values', values)
+
     return new Promise((resolve, reject) => {
         if (!userGameStats) {
             reject("User game stats are not valid!")

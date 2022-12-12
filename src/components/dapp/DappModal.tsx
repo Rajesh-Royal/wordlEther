@@ -3,6 +3,7 @@ import { useWeb3React } from "@web3-react/core";
 import TransactionSuccess from "components/TransactionSuccess";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { useGameStore } from "stores/game";
 import Modal, { Props as ModalProps } from "../Modal";
 import { ConnectWalletButton } from "./components/ConnectWalletButton";
 import TransactionForm from "./components/TransactionForm";
@@ -13,6 +14,7 @@ export default function DappModal(props: Props) {
   const { account, chainId  } = useWeb3React<Web3Provider>();
   const [steps, setSteps] = useState<"connect" | "userDetails" | "success" | "failed">("connect");
   const [txResults, setTxResults] = useState<TxResultsInterface | undefined>();
+    const { actions: gameActions } = useGameStore();
 
   // change step when wallet is connected
   useEffect(() => {
@@ -26,7 +28,9 @@ export default function DappModal(props: Props) {
   useEffect(() => {
     if (steps === "failed") {
       toast.error("Transaction Failed")
+      gameActions.closeModal();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [steps])
   return (
     <Modal title="Game Details" open={props.open} onClose={() => {

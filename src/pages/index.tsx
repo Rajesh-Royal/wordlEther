@@ -84,10 +84,10 @@ export default function Home() {
         open={gameState.activeModal === "settings"}
         onClose={gameActions.closeModal}
       />
-      <DappModal
+      {gameState.activeModal === "dapp" && <DappModal
         open={gameState.activeModal === "dapp"}
         onClose={gameActions.closeModal}
-      />
+      />}
     </div>
   );
 }
