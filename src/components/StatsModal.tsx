@@ -9,7 +9,7 @@ export type Props = Pick<ModalProps, "open" | "onClose">;
 export default function StatsModal(props: Props) {
   const { state } = useStatsStore();
   const { actions: gameActions } = useGameStore();
-  
+
   const totalPlayed = state.wins + state.losses;
 
   const stats = useMemo(
@@ -70,9 +70,8 @@ export default function StatsModal(props: Props) {
         </div>
         <div className="text-center mt-4">
           <KeyButton onClick={() => {
-            console.log("hello")
             gameActions.openModal("dapp")
-           }} >Create Blockchain Entry</KeyButton>
+          }} >Create Blockchain Entry</KeyButton>
         </div>
       </div>
     </Modal>

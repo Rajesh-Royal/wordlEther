@@ -6,15 +6,15 @@ import { SUPPORTED_CHAINS } from 'enums/supported-chains'
 import { KeyButton } from '../../Keyboard'
 
 export const ConnectWalletButton = () => {
-  const injectedConnector = new InjectedConnector({supportedChainIds: [SUPPORTED_CHAINS.ROPESTEN_TESTNET],})
+  const injectedConnector = new InjectedConnector({ supportedChainIds: [SUPPORTED_CHAINS.GOERLI], })
   const { activate, account } = useWeb3React<Web3Provider>()
   const connectWallet = () => {
     activate(injectedConnector)
   }
   return (
-       account ? <KeyButton type="button">Connected ✅</KeyButton> : <KeyButton type="button" onClick={connectWallet}>
-          Connect Metamask
-        </KeyButton>
+    account ? <KeyButton type="button">Connected ✅</KeyButton> : <KeyButton type="button" onClick={connectWallet}>
+      Connect Metamask
+    </KeyButton>
   )
 }
 
